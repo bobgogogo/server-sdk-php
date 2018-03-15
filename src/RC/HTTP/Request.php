@@ -25,6 +25,8 @@ final class Request
 			//json 方法 POST 数据
 			$data = json_encode($data);
 		}
+        // echo "<pre>";
+        // var_dump($data);
 		$ch = curl_init();
        
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -41,17 +43,11 @@ final class Request
         $strResult = curl_exec($ch);
         $rInfo = curl_getinfo($ch);
         curl_close($ch);
-        if ($result == true){
-            $str = json_decode($strResult, true);
-            if (is_null($str)){
-                return $strResult;
-            }
-            return $str;
-        }
+        // var_dump($strResult,$rInfo);exit;
         if ($rInfo['http_code'] == '200') {
             $arrResult = json_decode($strResult, true);
         } else {
-            return false;
+            $arrResult = json_decode($strResult, true);
         }
         return $arrResult;
 	}

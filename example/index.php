@@ -80,16 +80,27 @@ use RC\Message;
 * 发送单聊消息方法  
 */
 //content信息需要先转换为json格式，其他参数请参考官方文档
-$content = json_encode(['content'=>'Hello World','extra'=>'helloExtra']);
-$params = ['content'=>$content,'fromUserId'=>'1','toUserId'=>'2','objectName'=>'RC:TxtMsg'];
-$res = Message::private_publish($params);
-var_dump($res);
+// $content = json_encode(['content'=>'Hello World','extra'=>'helloExtra']);
+// $params = ['fromUserId'=>'1','toUserId'=>'2','objectName'=>'RC:TxtMsg','content'=>$content];
+// $res = Message::private_publish($params);
+// var_dump($res);
 
 /**
 * 发送单聊模板消息方法
 */
-//content,pushContent 信息需要先转换为json格式，其他参数请参考官方文档
-// $content = json_encode(['content'=>'Hello World','extra'=>'helloExtra']);
+//content 信息需要先转换为json格式，其他参数请参考官方文档
+$content = json_encode(['content'=>'Hello World','extra'=>'helloExtra']);
+$params =	['fromUserId'=>'1',
+			'toUserId'=>['2','3'],
+			'objectName'=>'RC:TxtMsg',
+			'values'=>[['{a}'=>'123','{c}'=>'789'],['{b}'=>'456']],
+			'content'=>$content,
+			'pushContent'=>['push{a}','push{b}']
+			];
+//所有提交方式为json的提交，都采用实例化类的方法完成
+$message = new Message();
+$res = $message->private_publish_template($params);
+var_dump($res);
 /**
 * 
 */

@@ -19,4 +19,4 @@ define('RURL','http://api.cn.ronghub.com/');
 // define('BACK','json');
 
 spl_autoload_register('classLoader');
-// require_once  __DIR__ . '/src/RC/functions.php';
+require_once  __DIR__ . '/src/RC/functions.php';
