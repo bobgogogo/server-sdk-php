@@ -3,23 +3,25 @@ require_once '../autoload.php';
 
 use RC\User;
 
+use RC\Message;
+
+
 /**
 * 
 */
-// $Auth = new Auth;
 
 /**
 * 注册用户，生成用户在融云的唯一身份标识 Token，各端 SDK 使用 Token 连接融云服务器
 */
-// $params = ['userId'=>'1','name'=>'小A','portraitUri'=>'https://t10.baidu.com/it/u=1169422368,3313647490&fm=173&app=12&f=JPEG?w=550&h=238&s=1EB46C8154611503B639DD130300C0C0'];
-// $res = Auth::getToken($params);
+// $params = ['userId'=>$_GET['id'],'name'=>'小A','portraitUri'=>'https://t10.baidu.com/it/u=1169422368,3313647490&fm=173&app=12&f=JPEG?w=550&h=238&s=1EB46C8154611503B639DD130300C0C0'];
+// $res = User::getToken($params);
 // var_dump($res);
 
 /**
 * 当您的用户昵称和头像变更时，您的 App Server 应该调用此接口刷新在融云侧保存的用户信息，以便融云发送推送消息的时候，能够正确显示用户信息。
 */
 // $params = ['userId'=>'1','name'=>'小B','portraitUri'=>'https://t10.baidu.com/it/u=1169422368,3313647490&fm=173&app=12&f=JPEG?w=550&h=238&s=1EB46C8154611503B639DD130300C0C0'];
-// $res = Auth::refresh($params);
+// $res = User::refresh($params);
 // var_dump($res);
 
 /**
@@ -72,12 +74,22 @@ use RC\User;
 // $res = User::blacklist_query($params);
 // var_dump($res);
 
+/*********************SDK全部以文本消息为测试方法，具体消息体以官网提供为主***************************/
+
 /**
-* 
+* 发送单聊消息方法  
 */
+//content信息需要先转换为json格式，其他参数请参考官方文档
+$content = json_encode(['content'=>'Hello World','extra'=>'helloExtra']);
+$params = ['content'=>$content,'fromUserId'=>'1','toUserId'=>'2','objectName'=>'RC:TxtMsg'];
+$res = Message::private_publish($params);
+var_dump($res);
+
 /**
-* 
+* 发送单聊模板消息方法
 */
+//content,pushContent 信息需要先转换为json格式，其他参数请参考官方文档
+// $content = json_encode(['content'=>'Hello World','extra'=>'helloExtra']);
 /**
 * 
 */
