@@ -18,6 +18,4 @@ final class Message
 		$res = Request::postCurl(strtolower(getName(__CLASS__)).'/'.$name,$arguments[0],2);
 		return $res;
 	}
-
-
 }
